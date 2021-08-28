@@ -1,0 +1,52 @@
+{
+  "name": "expensify-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev-server": "webpack-dev-server",
+    "build": "webpack",
+    "test": "jest --config=src/tests/jest.config.json"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/node": "^7.14.9",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/register": "^7.15.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^27.0.6",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^6.2.0",
+    "node-sass": "^6.0.1",
+    "react-test-renderer": "16.0.0",
+    "regenerator-runtime": "^0.13.9",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "ts-jest": "^27.0.5",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.0.0"
+  },
+  "dependencies": {
+    "enzyme": "3.0.0",
+    "enzyme-adapter-react-16": "1.0.0",
+    "enzyme-to-json": "3.0.1",
+    "jest": "^27.0.6",
+    "moment": "2.18.1",
+    "normalize.css": "^8.0.1",
+    "raf": "3.3.2",
+    "react": "^17.0.2",
+    "react-addons-shallow-compare": "15.6.0",
+    "react-dates": "12.7.0",
+    "react-dom": "^17.0.2",
+    "react-modal": "^3.14.3",
+    "react-redux": "5.0.5",
+    "react-router-dom": "4.2.2",
+    "redux": "3.7.2",
+    "uuid": "3.1.0",
+    "webpack": "^5.51.1"
+  }
+}
