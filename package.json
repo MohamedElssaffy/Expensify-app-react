@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node server/server.js",
     "dev-server": "webpack-dev-server",
     "build": "webpack",
     "test": "jest --config=src/tests/jest.config.json"
@@ -35,6 +36,7 @@
     "enzyme": "3.0.0",
     "enzyme-adapter-react-16": "1.0.0",
     "enzyme-to-json": "3.0.1",
+    "express": "^4.17.1",
     "jest": "^27.0.6",
     "moment": "2.18.1",
     "normalize.css": "^8.0.1",
