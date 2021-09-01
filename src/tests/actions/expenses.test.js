@@ -9,6 +9,8 @@ import {
   editExpense,
   setExpenses,
   startSetExpenses,
+  startRemoveExpense,
+  startEditExpense,
 } from '../../actions/expenses';
 import expenses from '../seed-data/expenses';
 
@@ -140,4 +142,53 @@ test('Should fitch expenses from database', (done) => {
     });
     done();
   });
+});
+
+test('Should remove expnese', (done) => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  store
+    .dispatch(startRemoveExpense({ id }))
+    .then(() => {
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'REMOVE_EXPENSE',
+        id,
+      });
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toBeFalsy();
+      done();
+    });
+});
+
+test('Should edit expense from database', (done) => {
+  const store = createMockStore({});
+  const id = expenses[2].id;
+  const updates = {
+    description: 'Updated expense from testing',
+  };
+  store
+    .dispatch(startEditExpense(id, updates))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: 'EDIT_EXPENSE',
+        id,
+        updates,
+      });
+
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then((snapshot) => {
+      const expense = { ...snapshot.val(), id: snapshot.key };
+      expect(expense).toEqual({
+        ...expenses[2],
+
+        ...updates,
+      });
+      done();
+    });
 });
