@@ -7,8 +7,22 @@ import {
   addExpense,
   removeExpense,
   editExpense,
+  setExpenses,
+  startSetExpenses,
 } from '../../actions/expenses';
 import expenses from '../seed-data/expenses';
+
+beforeEach((done) => {
+  const expensesData = {};
+
+  expenses.forEach(({ id, description, amount, note, createdAt }) => {
+    expensesData[id] = { description, amount, note, createdAt };
+  });
+  database
+    .ref('expenses')
+    .set(expensesData)
+    .then(() => done());
+});
 
 const createMockStore = configureMockStor([thunk]);
 
@@ -106,17 +120,24 @@ test('Should add expense with default values to database and store', (done) => {
     });
 });
 
-// test('Should Return add action object with default data', () => {
-//   const action = addExpense();
+test('Should return action object', () => {
+  const action = setExpenses(expenses);
 
-//   expect(action).toEqual({
-//     type: 'ADD_EXPENSE',
-//     expense: {
-//       id: expect.any(String),
-//       description: '',
-//       note: '',
-//       amount: 0,
-//       createdAt: 0,
-//     },
-//   });
-// });
+  expect(action).toEqual({
+    type: 'SET_EXPENSES',
+    expenses,
+  });
+});
+
+test('Should fitch expenses from database', (done) => {
+  const store = createMockStore({});
+
+  store.dispatch(startSetExpenses()).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: 'SET_EXPENSES',
+      expenses,
+    });
+    done();
+  });
+});
