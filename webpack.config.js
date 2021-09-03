@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'test') {
 module.exports = {
   mode: isProd ? 'production' : 'development',
   entry: {
-    index: './src/app.js',
+    index: ['babel-polyfill', './src/app.js'],
   },
   output: {
     path: path.join(__dirname, 'public'),

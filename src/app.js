@@ -7,6 +7,7 @@ import reduxStore from './store/reduxStore';
 import 'normalize.css/normalize.css';
 import './styles/style.scss';
 import 'react-dates/lib/css/_datepicker.css';
+import LoadingPage from './components/LoadingPage';
 import { firebase } from './firebase/firebase';
 import { startSetExpenses } from './actions/expenses';
 import { logout, login } from './actions/auth';
@@ -27,6 +28,8 @@ const renderApp = () => {
   }
 };
 
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
+
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     store.dispatch(login(user.uid));
@@ -42,5 +45,3 @@ firebase.auth().onAuthStateChanged((user) => {
     history.push('/');
   }
 });
-
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
